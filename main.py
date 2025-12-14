@@ -4,6 +4,7 @@ import models
 from database import engine
 from routers import certification, country, cupping_score, cupping_session, farm, lot, process, producer, region, subregion, tasting_note, variety
 
+# create_all is intended for local development; use migrations for production environments.
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="World Coffee Farm API", version="1.0")
