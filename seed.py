@@ -1,4 +1,6 @@
-from database import SessionLocal, engine
+import sys
+
+from database import SessionLocal, engine, verify_database_connection, DatabaseConnectionError
 import models
 
 
@@ -55,5 +57,11 @@ def seed():
 
 
 if __name__ == "__main__":
+    try:
+        verify_database_connection()
+    except DatabaseConnectionError as exc:  # pragma: no cover - user guidance only
+        print(exc)
+        sys.exit(1)
+
     models.Base.metadata.create_all(bind=engine)
     seed()
